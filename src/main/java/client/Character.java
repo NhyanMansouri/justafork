@@ -3114,12 +3114,12 @@ public class Character extends AbstractCharacterObject {
 
                 if (YamlConfig.config.server.USE_EXP_GAIN_LOG) {
                     ExpLogRecord expLogRecord = new ExpLogger.ExpLogRecord(
-                        getWorldServer().getExpRate(),
-                        expCoupon,
-                        totalExpGained,
-                        exp.get(),
-                        new Timestamp(lastExpGainTime),
-                        id
+                            getWorldServer().getExpRate(),
+                            expCoupon,
+                            totalExpGained,
+                            exp.get(),
+                            new Timestamp(lastExpGainTime),
+                            id
                     );
                     ExpLogger.putExpLogRecord(expLogRecord);
                 }
@@ -6537,6 +6537,7 @@ public class Character extends AbstractCharacterObject {
             return false;
         }
     }
+
     public void setPlayerRates() {
         this.expRate *= GameConstants.getPlayerBonusExpRate(this.level / 20);
         this.mesoRate *= GameConstants.getPlayerBonusMesoRate(this.level / 20);
@@ -7330,18 +7331,18 @@ public class Character extends AbstractCharacterObject {
                         }
                     }
                 }
-                
+
                 ret.buddylist.loadFromDb(charid);
                 ret.storage = wserv.getAccountStorage(ret.accountid);
 
                 /* Double-check storage incase player is first time on server
                  * The storage won't exist so nothing to load
                  */
-                if(ret.storage == null) {
+                if (ret.storage == null) {
                     wserv.loadAccountStorage(ret.accountid);
                     ret.storage = wserv.getAccountStorage(ret.accountid);
                 }
-                
+
                 int startHp = ret.hp, startMp = ret.mp;
                 ret.reapplyLocalStats();
                 ret.changeHpMp(startHp, startMp, true);
@@ -8234,7 +8235,7 @@ public class Character extends AbstractCharacterObject {
                         ps.executeBatch();
                     }
                 }
-                
+
                 con.commit();
                 return true;
             } catch (Exception e) {
@@ -9971,7 +9972,8 @@ public class Character extends AbstractCharacterObject {
     }
 
     @Override
-    public void setObjectId(int id) {}
+    public void setObjectId(int id) {
+    }
 
     @Override
     public String toString() {
@@ -11238,5 +11240,33 @@ public class Character extends AbstractCharacterObject {
 
     public void setChasing(boolean chasing) {
         this.chasing = chasing;
+    }
+
+    private String dataSearch;
+    private ArrayList<Integer> dataSearchArr;
+    private String dataSearchType;
+
+    public String getDataSearch() {
+        return dataSearch;
+    }
+
+    public void setDataSearch(String result) {
+        dataSearch = result;
+    }
+
+    public ArrayList<Integer> getDataSearchArr() {
+        return dataSearchArr;
+    }
+
+    public void setDataSearchArr(ArrayList<Integer> arr) {
+        dataSearchArr = arr;
+    }
+
+    public String getDataSearchType() {
+        return dataSearchType;
+    }
+
+    public void setDataSearchType(String dataSearchType) {
+        this.dataSearchType = dataSearchType;
     }
 }
